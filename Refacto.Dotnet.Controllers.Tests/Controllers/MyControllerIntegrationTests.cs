@@ -45,6 +45,8 @@ namespace Refacto.Dotnet.Controllers.Tests.Controllers
 
             IServiceScope scope = _factory.Services.CreateScope();
             _context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
         }
 
         [Fact]
