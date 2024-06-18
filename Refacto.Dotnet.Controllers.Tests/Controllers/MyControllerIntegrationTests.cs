@@ -8,6 +8,7 @@ using Refacto.DotNet.Controllers.Services;
 
 namespace Refacto.Dotnet.Controllers.Tests.Controllers
 {
+    [Collection("Sequential")]
     public class MyControllerIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
