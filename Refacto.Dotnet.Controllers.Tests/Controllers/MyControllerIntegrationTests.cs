@@ -8,6 +8,7 @@ using Refacto.DotNet.Controllers.Services;
 
 namespace Refacto.Dotnet.Controllers.Tests.Controllers
 {
+    [Collection("Sequential")]
     public class MyControllerIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
@@ -44,6 +45,8 @@ namespace Refacto.Dotnet.Controllers.Tests.Controllers
 
             IServiceScope scope = _factory.Services.CreateScope();
             _context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
         }
 
         [Fact]
