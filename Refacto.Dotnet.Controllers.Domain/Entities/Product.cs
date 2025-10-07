@@ -1,16 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Refacto.Dotnet.Controllers.Domain.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Refacto.DotNet.Controllers.Entities
 {
     [Table("products")]
-    public class Product
+    public class Product : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public long Id { get; set; }
-
         [Column("lead_time")]
         public int LeadTime { get; set; }
 

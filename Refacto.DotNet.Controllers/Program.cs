@@ -18,6 +18,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     _ = options.UseInMemoryDatabase($"InMemoryDb");
 });
 
+Refacto.DotNet.Controllers.Applications.DependencyInjection.AddServices(builder.Services);
+Refacto.DotNet.Controllers.Infrastructure.DependencyInjection.AddRepositories(builder.Services);
+
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.

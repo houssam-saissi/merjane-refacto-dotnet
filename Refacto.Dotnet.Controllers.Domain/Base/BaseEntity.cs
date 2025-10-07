@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Refacto.DotNet.Controllers.Entities
+namespace Refacto.Dotnet.Controllers.Domain.Base
 {
-    [Table("orders")]
-    public class Order
+    public abstract class BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         public long Id { get; set; }
-
-        public ICollection<Product>? Items { get; set; }
     }
 }

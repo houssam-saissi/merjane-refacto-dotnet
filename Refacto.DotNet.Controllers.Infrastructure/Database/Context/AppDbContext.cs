@@ -24,7 +24,6 @@ namespace Refacto.DotNet.Controllers.Database.Context
 
         }
 
-
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
 
