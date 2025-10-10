@@ -1,13 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Refacto.Dotnet.Controllers.Domain.Base
+﻿namespace Refacto.Dotnet.Controllers.Domain.Base
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity<T>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public long Id { get; set; }
+        public required T Id { get; set; }
     }
 }

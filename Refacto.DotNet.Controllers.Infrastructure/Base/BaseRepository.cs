@@ -1,14 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Refacto.Dotnet.Controllers.Domain.Base;
 using Refacto.DotNet.Controllers.Database.Context;
-using Refacto.DotNet.Controllers.Infrastructure.Base;
 
-namespace Refacto.DotNet.Controllers.Infrastructure.Repository
+namespace Refacto.DotNet.Controllers.Infrastructure.Base
 {
-    public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity>
-            where TEntity : BaseEntity
-            where TContext : AppDbContext
+    public class BaseRepository<TEntity, TType, TContext> : IBaseRepository<TEntity, TType> where TEntity : BaseEntity<TType> where TContext : AppDbContext
     {
+
         protected readonly TContext _dbContext;
 
         public BaseRepository(TContext context)
@@ -16,11 +14,11 @@ namespace Refacto.DotNet.Controllers.Infrastructure.Repository
             _dbContext = context;
         }
 
-        public TEntity GetById(long id)
+        public async Task<List<TEntity>> GetAll()
         {
             try
             {
-                return _dbContext.Set<TEntity>().Find(id);
+                return await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -28,11 +26,11 @@ namespace Refacto.DotNet.Controllers.Infrastructure.Repository
             }
         }
 
-        public List<TEntity> GetAll()
+        public async Task<TEntity> GetById(TType id)
         {
             try
             {
-                return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+                return await _dbContext.Set<TEntity>().FindAsync(id);
             }
             catch (Exception ex)
             {
@@ -40,5 +38,10 @@ namespace Refacto.DotNet.Controllers.Infrastructure.Repository
             }
         }
 
+        public async Task SaveData(TEntity entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

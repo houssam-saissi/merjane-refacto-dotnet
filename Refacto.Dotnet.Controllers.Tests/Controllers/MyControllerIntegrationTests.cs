@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using Refacto.DotNet.Controllers.Applications.Service.Notification;
 using Refacto.DotNet.Controllers.Database.Context;
 using Refacto.DotNet.Controllers.Entities;
-using Refacto.DotNet.Controllers.Services;
 
 namespace Refacto.Dotnet.Controllers.Tests.Controllers
 {

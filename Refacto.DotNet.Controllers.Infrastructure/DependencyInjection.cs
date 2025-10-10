@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Refacto.DotNet.Controllers.Entities;
 using Refacto.DotNet.Controllers.Infrastructure.Repository;
+using Refacto.DotNet.Controllers.Infrastructure.Repository.Product;
 
 namespace Refacto.DotNet.Controllers.Infrastructure
 {
@@ -7,8 +9,8 @@ namespace Refacto.DotNet.Controllers.Infrastructure
     {
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<OrderRepository>();
-            services.AddScoped<ProductRepository>();
+            services.AddScoped <IOrderRepository<Order, long>>();
+            services.AddScoped <IProductRepository<Product, long>>();
         }
     }
 }

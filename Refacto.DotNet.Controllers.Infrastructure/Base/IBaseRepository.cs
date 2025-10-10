@@ -2,9 +2,10 @@
 
 namespace Refacto.DotNet.Controllers.Infrastructure.Base
 {
-    public interface IBaseRepository<T> where T : BaseEntity
+    public interface IBaseRepository<TEntity, TType> where TEntity : BaseEntity<TType>
     {
-        T GetById(long id);
-        List<T> GetAll();
+        Task<TEntity> GetById(TType id);
+        Task<List<TEntity>> GetAll();
+        Task SaveData(TEntity entity);
     }
 }

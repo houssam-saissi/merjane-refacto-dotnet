@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Refacto.DotNet.Controllers.Entities;
+using System.Reflection;
 
 namespace Refacto.DotNet.Controllers.Database.Context
 {
@@ -9,19 +10,18 @@ namespace Refacto.DotNet.Controllers.Database.Context
         {
         }
 
-        public AppDbContext() : base()
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+         
             // Configure many-to-many relationship between Order and Product
             _ = modelBuilder.Entity<Order>()
                 .HasMany(o => o.Items)
                 .WithMany(); // Since Product doesn't have a collection for Order
 
+            // Apply all configurations from the current assembly
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public virtual DbSet<Order> Orders { get; set; }

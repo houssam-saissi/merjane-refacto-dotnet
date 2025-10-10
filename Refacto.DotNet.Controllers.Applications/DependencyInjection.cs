@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Refacto.DotNet.Controllers.Applications.Service;
+using Refacto.DotNet.Controllers.Applications.ServiceOrder;
+using Refacto.DotNet.Controllers.Applications.ServiceProduct;
+using Refacto.DotNet.Controllers.Applications.StrategyProduct;
 
 namespace Refacto.DotNet.Controllers.Applications
 {
@@ -8,8 +10,12 @@ namespace Refacto.DotNet.Controllers.Applications
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<OrderService>();
-            services.AddScoped<ProductService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IProductService, ProductService>();
+
+            services.AddScoped<ProductStrategyNormal>();
+            services.AddScoped<ProductStrategySeasonal>();
+            services.AddScoped<ProductStrategyExpirable>();
         }
     }
 }

@@ -1,30 +1,22 @@
 ﻿using Refacto.Dotnet.Controllers.Domain.Base;
-using System.ComponentModel.DataAnnotations.Schema;
+using Refacto.Dotnet.Controllers.Domain.Enums;
 
 namespace Refacto.DotNet.Controllers.Entities
 {
-    [Table("products")]
-    public class Product : BaseEntity
+    public class Product : BaseEntity<long>
     {
-        [Column("lead_time")]
         public int LeadTime { get; set; }
 
-        [Column("available")]
         public int Available { get; set; }
 
-        [Column("type")]
-        public string? Type { get; set; }
+        public ProductType Type { get; set; }
 
-        [Column("name")]
-        public string? Name { get; set; }
+        public required string Name { get; set; }
 
-        [Column("expiry_date")]
-        public DateTime? ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
 
-        [Column("season_start_date")]
-        public DateTime? SeasonStartDate { get; set; }
+        public DateTime SeasonStartDate { get; set; }
 
-        [Column("season_end_date")]
-        public DateTime? SeasonEndDate { get; set; }
+        public DateTime SeasonEndDate { get; set; }
     }
 }
